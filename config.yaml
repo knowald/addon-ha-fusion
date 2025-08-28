@@ -12,7 +12,7 @@ arch:
 init: false
 
 # homepage of the add-on
-url: https://github.com/matt8707/addon-ha-fusion
+url: https://github.com/knowald/addon-ha-fusion
 
 # icon for the menu panel integration
 panel_icon: mdi:atom
@@ -35,4 +35,4 @@ ports:
   8099/tcp: null
 
 # docker hub
-image: matt8707/addon-ha-fusion-{arch}
+image: knowald/addon-ha-fusion-{arch}
