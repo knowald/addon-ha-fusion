@@ -1,3 +1,9 @@
+## 2025.10.0
+
+- Version bump to 2025.10.0
+
+---
+
 ## What's Changed
 
 - Fix picture elements add new image by @matt8707 in <https://github.com/matt8707/ha-fusion/pull/579>
