@@ -1,16 +1,17 @@
-## 2025.10.0
+## 2026.3.2
 
-- Version bump to 2025.10.0
+### Changed
 
----
+- Migrate the app to Svelte 5 runes, converting all components, event handlers, and stores
+- Replace svelte-dnd-action with SortableJS for drag-and-drop under Svelte 5
+- Exclude legacy Svelte 4 libraries from Vite prebundling so they load in runes mode
+- Rewrite the README and refresh the preview screenshot
 
-## What's Changed
+### Fixed
 
-- Fix picture elements add new image by @matt8707 in <https://github.com/matt8707/ha-fusion/pull/579>
+- Resolve runtime `$effect` loops and reactivity bugs from the runes migration
+- Restore drag-drop UI updates and redo history after the migration
+- Render a newly added object immediately in the dashboard editor
+- Correct drag reorder order and fix a crash on cross-zone item drops
 
-![pe](https://github.com/user-attachments/assets/aef438e5-f174-47a2-8089-a948126ddd2d)
-
-**Full Changelog**: <https://github.com/matt8707/ha-fusion/compare/2024.10.0...2024.10.1>
-
-...
-
+**Full Changelog**: <https://github.com/knowald/ha-fusion/releases/tag/2026.3.2>
