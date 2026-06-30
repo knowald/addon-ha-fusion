@@ -7,10 +7,12 @@ WORKDIR /app
 
 ### remote
 # clone, build and remove repo example data
+# --legacy-peer-deps: the app is built with pnpm; some deps (e.g.
+# svelte-tiny-virtual-list) still declare a Svelte 4 peer, which npm rejects
 RUN git clone --depth 1 https://github.com/knowald/ha-fusion . && \
-  npm install --verbose && \
+  npm install --legacy-peer-deps --verbose && \
   npm run build && \
-  npm prune --omit=dev && \
+  npm prune --omit=dev --legacy-peer-deps && \
   rm -rf ./data/*
 
 # ### local
