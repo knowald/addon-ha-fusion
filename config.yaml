@@ -6,7 +6,6 @@ description: A modern, easy-to-use and performant custom Home Assistant dashboar
 arch:
   - aarch64
   - amd64
-  - armv7
 
 # disable the docker default system init
 init: false
