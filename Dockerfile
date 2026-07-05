@@ -5,11 +5,15 @@ ARG BUILD_FROM
 FROM node:22 AS builder
 WORKDIR /app
 
+# ha builder passes BUILD_VERSION from config.yaml, so the addon builds the
+# matching ha-fusion release tag instead of whatever main happens to be
+ARG BUILD_VERSION
+
 ### remote
 # clone, build and remove repo example data
 # --legacy-peer-deps: the app is built with pnpm; some deps (e.g.
 # svelte-tiny-virtual-list) still declare a Svelte 4 peer, which npm rejects
-RUN git clone --depth 1 https://github.com/knowald/ha-fusion . && \
+RUN git clone --depth 1 --branch "${BUILD_VERSION}" https://github.com/knowald/ha-fusion . && \
   npm install --legacy-peer-deps --verbose && \
   npm run build && \
   npm prune --omit=dev --legacy-peer-deps && \
