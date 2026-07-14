@@ -5,23 +5,46 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: read
+
 jobs:
   publish:
-    name: Publish
-    runs-on: ubuntu-latest
+    name: Publish ${{ matrix.arch }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            os: ubuntu-24.04
+            base: ghcr.io/home-assistant/amd64-base:latest
+          - arch: aarch64
+            os: ubuntu-24.04-arm
+            base: ghcr.io/home-assistant/aarch64-base:latest
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
-      - name: Login to DockerHub
-        uses: docker/login-action@v3
+
+      - name: Read add-on version
+        id: version
+        run: |
+          version=$(grep -m1 '^version:' config.yaml | sed -E 's/^version:[[:space:]]*//')
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and publish
+        uses: home-assistant/builder/actions/build-image@4de35182ce1e329181bffcbcc84d33db5e2c7e10 # 2026.06.0
         with:
-          username: knowald
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Publish
-        uses: home-assistant/builder@master
-        with:
-          args: |
-            --amd64 \
-            --aarch64 \
-            --target /data \
-            --docker-hub knowald
+          arch: ${{ matrix.arch }}
+          image: knowald/addon-ha-fusion-${{ matrix.arch }}
+          version: ${{ steps.version.outputs.version }}
+          build-args: |
+            BUILD_FROM=${{ matrix.base }}
+          container-registry: docker.io
+          container-registry-username: knowald
+          container-registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
+          image-tags: |
+            ${{ steps.version.outputs.version }}
+            latest
+          push: "true"
+          cosign: "false"
