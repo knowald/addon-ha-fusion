@@ -15,13 +15,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # base images pinned by digest so a mutated :latest cannot change what
+        # CI builds without a repository change; bump digests deliberately
         include:
           - arch: amd64
             os: ubuntu-24.04
-            base: ghcr.io/home-assistant/amd64-base:latest
+            base: ghcr.io/home-assistant/amd64-base:latest@sha256:2b60b12b34ccd960fda082d223b40dbb2b0bb40af95f12912233b736f27fc47a
           - arch: aarch64
             os: ubuntu-24.04-arm
-            base: ghcr.io/home-assistant/aarch64-base:latest
+            base: ghcr.io/home-assistant/aarch64-base:latest@sha256:2ac8f73090063ac23e63a1adc144bd1d8aa88f5e5d92c68898102e81046084a4
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
