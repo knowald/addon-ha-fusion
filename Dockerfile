@@ -1,8 +1,9 @@
 # ha base image
 ARG BUILD_FROM
 
-# first stage, can't use alpine for building armv7
-FROM node:22 AS builder
+# Build the architecture-independent web bundle natively. Building it in the
+# target architecture under QEMU can stall or crash as the bundle grows.
+FROM --platform=$BUILDPLATFORM node:22 AS builder
 WORKDIR /app
 
 # ha builder passes BUILD_VERSION from config.yaml, so the addon builds the
