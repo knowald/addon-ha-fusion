@@ -1,12 +1,23 @@
-## 2026.7.1
+## 2026.7.2
+
+### Added
+
+- Add an early preview of the Hearth dashboard, opt in by setting `hearth: true` in `configuration.yaml` to get a drawer button that opens it
+
+### Changed
+
+- Bump JS dependencies within semver ranges and fix audit vulnerabilities
+- Bump GitHub Actions used by CI workflows
 
 ### Fixed
 
-- Re-render the dashboard on in-place config edits and restrict section drag to the drag handle
-- Replace the unknown domain error modal with a generic entity modal
-- Complete the PWA manifest and add an apple touch icon
-- Respect target_temp_step in the thermostat temperature wheel
-- Only offer alarm arm modes the panel supports
+- Recover camera HLS playback after network errors
+- Harden auth token handling and redirect back to the ingress path after login
+- Set the connected store on the initial websocket connection
+- Guard modal state reads against pre-connection undefined states
+- Declare mutated component state with $state so updates render
+- Reserve a scrollbar gutter in the modal body instead of padding tricks
+- Make the sidebar weather responsive
 
 
-**Full Changelog**: <https://github.com/knowald/ha-fusion/releases/tag/2026.7.1>
+**Full Changelog**: <https://github.com/knowald/ha-fusion/releases/tag/2026.7.2>
