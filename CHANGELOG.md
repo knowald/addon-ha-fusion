@@ -1,8 +1,13 @@
-## 2026.7.3
+## 2026.7.4
+
+### Changed
+
+- Build and run the Docker images on Node 24
 
 ### Fixed
 
-- Repair the multi-arch Docker image build by compiling the web bundle on the build platform, 32-bit node segfaulted under emulation
+- Keep rendering when an entity state looks like a timestamp but cannot be parsed, the state is shown as-is instead of throwing
+- Skip camera playback instead of failing when the stream URL is missing
 
 
-**Full Changelog**: <https://github.com/knowald/ha-fusion/releases/tag/2026.7.3>
+**Full Changelog**: <https://github.com/knowald/ha-fusion/releases/tag/2026.7.4>
